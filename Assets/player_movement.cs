@@ -5,7 +5,6 @@ public class player_movement : NetworkBehaviour
 {
     public TextMesh playerNameText;
     public GameObject floatingInfo;
-
     private Material playerMaterialClone;
 
     [SyncVar(hook = nameof(OnNameChanged))]
@@ -42,7 +41,6 @@ public class player_movement : NetworkBehaviour
     [Command]
     public void CmdSetupPlayer(string _name, Color _col)
     {
-        // player info sent to server, then server updates sync vars which handles it on all clients
         playerName = _name;
         playerColor = _col;
     }
@@ -57,8 +55,5 @@ public class player_movement : NetworkBehaviour
 
         float moveX = Input.GetAxis("Horizontal") * Time.deltaTime * 110.0f;
         float moveZ = Input.GetAxis("Vertical") * Time.deltaTime * 4f;
-
-        transform.Rotate(0, moveX, 0);
-        transform.Translate(0, 0, moveZ);
     }
 }

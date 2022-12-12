@@ -114,6 +114,8 @@ GameObject:
   - component: {fileID: 5026748689773890716}
   - component: {fileID: -2117185393383520226}
   - component: {fileID: 494020208586590081}
+  - component: {fileID: 125071138425960325}
+  - component: {fileID: 7377135591509543514}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -234,7 +236,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   target: {fileID: 6840546627857082129}
-  clientAuthority: 1
+  clientAuthority: 0
   onlySyncOnChange: 1
   bufferResetMultiplier: 5
   positionSensitivity: 0.01
@@ -304,6 +306,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!143 &125071138425960325
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175512977382039938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7377135591509543514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175512977382039938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bbf558f6cd0e0144bdc7ea2c87d7834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeed: 7.5
+  jumpSpeed: 8
+  gravity: 20
+  lookSpeed: 2
+  lookXLimit: 45
 --- !u!1 &6211444500075245206
 GameObject:
   m_ObjectHideFlags: 0
