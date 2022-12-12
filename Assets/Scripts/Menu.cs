@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 public class Menu : MonoBehaviour
 {
+
+    [SerializeField] private TMP_InputField ipInput;
+    [SerializeField] private TMP_InputField nameInput;
+
     private Color color;
     private GameObject colorPreview;
 
@@ -45,6 +51,9 @@ public class Menu : MonoBehaviour
 
     public void OnJoinGameClicked()
     {
+        if (string.IsNullOrEmpty(ipInput.text))
+            return;
         Debug.Log("Join game");
+        Debug.Log(ipInput.text);
     }
 }
