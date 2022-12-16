@@ -6,6 +6,7 @@ public class player_movement : NetworkBehaviour
     public TextMesh playerNameText;
     public GameObject floatingInfo;
     private Material playerMaterialClone;
+    private string role;
 
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName;
