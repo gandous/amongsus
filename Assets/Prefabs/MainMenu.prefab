@@ -3982,6 +3982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ipInput: {fileID: 5445949801163920312}
   nameInput: {fileID: 5445949801185619685}
+  manager: {fileID: 0}
 --- !u!1 &5445949801956320097
 GameObject:
   m_ObjectHideFlags: 0
