@@ -6,7 +6,8 @@ public class player_movement : NetworkBehaviour
     public TextMesh playerNameText;
     public GameObject floatingInfo;
     private Material playerMaterialClone;
-    private string role;
+    [SyncVar]
+    public string role = "Victime";
 
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName;
@@ -37,6 +38,7 @@ public class player_movement : NetworkBehaviour
         string name = "bgDu" + Random.Range(11, 99);
         Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         CmdSetupPlayer(name, color);
+        GameManager.Instance.AddPlayer(this);
     }
 
     [Command]
