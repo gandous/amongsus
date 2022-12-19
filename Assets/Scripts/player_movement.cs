@@ -1,11 +1,18 @@
 using Mirror;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class player_movement : NetworkBehaviour
 {
+    public static player_movement Local;
     public TextMesh playerNameText;
     public GameObject floatingInfo;
     private Material playerMaterialClone;
+
+    string Pname;
+    Color Pcolor;
     [SyncVar]
     public string role = "Victime";
 
@@ -28,17 +35,22 @@ public class player_movement : NetworkBehaviour
         GetComponent<Renderer>().material = playerMaterialClone;
     }
 
-    public override void OnStartLocalPlayer()
+    void Start()
     {
-        Camera.main.transform.SetParent(transform);
-        Camera.main.transform.localPosition = new Vector3(0, 0.5f, 0);
+        if (isLocalPlayer)
+        {
+            Local = this;
+            Camera.main.transform.SetParent(transform);
+            Camera.main.transform.localPosition = new Vector3(0, 0.5f, 0);
+        }
 
+        if (GameManager.Instance)
+            GameManager.Instance.AddPlayer(this);
+
+        Pname = "bgDu" + UnityEngine.Random.Range(11, 99);
+        Pcolor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
         floatingInfo.transform.localPosition = new Vector3(0, 1.2f, 0.2f);
-
-        string name = "bgDu" + Random.Range(11, 99);
-        Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        CmdSetupPlayer(name, color);
-        GameManager.Instance.AddPlayer(this);
+        CmdSetupPlayer(Pname, Pcolor);
     }
 
     [Command]
@@ -55,8 +67,5 @@ public class player_movement : NetworkBehaviour
             floatingInfo.transform.LookAt(Camera.main.transform);
             return;
         }
-
-        float moveX = Input.GetAxis("Horizontal") * Time.deltaTime * 110.0f;
-        float moveZ = Input.GetAxis("Vertical") * Time.deltaTime * 4f;
     }
 }
