@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         int role = UnityEngine.Random.Range(0, _players.Count);
-        _players[role].role = "SUSSUSIMPOSTER";
+        _players[role].role = Role.SUS;
 
         yield return new WaitForSeconds(1);
 

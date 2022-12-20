@@ -4,8 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Role {
+    Victime = 0,
+    SUS = 1,
+}
+
 public class player_movement : NetworkBehaviour
 {
+    public static string[] roleString = {"Victime", "AmongSUSImposter"};
     public static player_movement Local;
     public TextMesh playerNameText;
     public GameObject floatingInfo;
@@ -14,7 +20,7 @@ public class player_movement : NetworkBehaviour
     string Pname;
     Color Pcolor;
     [SyncVar]
-    public string role = "Victime";
+    public Role role = Role.Victime;
 
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName;

@@ -22,7 +22,8 @@ public class RoleUI : MonoBehaviour
     private void OnGameStart()
     {
         player_movement player = player_movement.Local;
-        Role.text = $"You are {player.role}";
+        string role = player_movement.roleString[(int)player.role];
+        Role.text = $"You are {role}";
         StartCoroutine(RemoveUI());
     }
 

@@ -22,7 +22,7 @@ public class InteractRaycast : MonoBehaviour
             Destroy(obj);
             obj = null;
         }
-        if (Input.GetButtonDown("Interact") && obj == null) {
+        if (Input.GetButtonDown("Interact")) {
             Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
             RaycastHit hit;
