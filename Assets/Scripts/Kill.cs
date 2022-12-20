@@ -29,8 +29,8 @@ public class Kill : NetworkBehaviour
         Vector3 pos = target_transform.position;
         pos.y -= 0.5f;
         GameObject body = NetworkManager.Instantiate(deadBody, pos, new Quaternion());
-        NetworkManager.Destroy(GetComponent<MeshFilter>());
-        NetworkManager.Destroy(GetComponent<MeshRenderer>());
-        target_player.dead();
+        NetworkManager.Destroy(target_player.GetComponent<MeshFilter>());
+        NetworkManager.Destroy(target_player.GetComponent<MeshRenderer>());
+        target_player.Dead();
     }
 }

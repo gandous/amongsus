@@ -31,7 +31,7 @@ public class player_movement : NetworkBehaviour
 
     internal void SetColor(Color color)
     {
-        connectionToServer.authenticationData
+        //connectionToServer.authenticationData
         playerColor = color;
         CmdSetupPlayer(Pname, color);
     }
@@ -74,7 +74,7 @@ public class player_movement : NetworkBehaviour
     }
 
     [Client]
-    public void dead()
+    public void Dead()
     {
         gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
     }
