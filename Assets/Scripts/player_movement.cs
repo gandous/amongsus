@@ -22,6 +22,7 @@ public class player_movement : NetworkBehaviour
     [SyncVar]
     public Role role = Role.Victime;
 
+    public bool dead = false;
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName;
 
@@ -30,6 +31,7 @@ public class player_movement : NetworkBehaviour
 
     internal void SetColor(Color color)
     {
+        connectionToServer.authenticationData
         playerColor = color;
         CmdSetupPlayer(Pname, color);
     }
