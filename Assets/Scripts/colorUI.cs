@@ -26,7 +26,6 @@ public class colorUI : NetworkBehaviour
 
         foreach (Color color in ColorChoices)
         {
-            print(color);
             Button ColorBtn = Instantiate(ColorPrefab, HorizontalLayout);
             ColorBtn.image.color = color;
             ColorBtn.onClick.AddListener(() => SelectColor(color));
@@ -45,6 +44,7 @@ public class colorUI : NetworkBehaviour
     
     private void SelectColor(Color color)
     {
+        print("test");
         player_movement player = player_movement.Local;
         int colorIndex = ColorChoices.FindIndex(x => x == color);
         CmdAskForColor(colorIndex, player);
@@ -67,5 +67,8 @@ public class colorUI : NetworkBehaviour
         ColorSelected.Add(entry);
 
         player.SetColor(ColorChoices[color]);
+    }
+    void Update()
+    {
     }
 }

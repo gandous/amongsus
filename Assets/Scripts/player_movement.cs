@@ -30,7 +30,8 @@ public class player_movement : NetworkBehaviour
 
     internal void SetColor(Color color)
     {
-        Pcolor = color;
+        playerColor = color;
+        CmdSetupPlayer(Pname, color);
     }
 
     void OnNameChanged(string _Old, string _New)
@@ -59,7 +60,6 @@ public class player_movement : NetworkBehaviour
             GameManager.Instance.AddPlayer(this);
 
         Pname = "bgDu" + UnityEngine.Random.Range(11, 99);
-        Pcolor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
         floatingInfo.transform.localPosition = new Vector3(0, 1.2f, 0.2f);
         CmdSetupPlayer(Pname, Pcolor);
     }
@@ -77,6 +77,13 @@ public class player_movement : NetworkBehaviour
         {
             floatingInfo.transform.LookAt(Camera.main.transform);
             return;
+        }
+        if (Input.GetKeyUp("t") == true)
+        {
+            print("bit");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+//                characterController = GetComponent<CharacterController>();
         }
     }
 }
