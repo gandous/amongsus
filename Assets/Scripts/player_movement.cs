@@ -28,6 +28,11 @@ public class player_movement : NetworkBehaviour
     [SyncVar(hook = nameof(OnColorChanged))]
     public Color playerColor = Color.white;
 
+    internal void SetColor(Color color)
+    {
+        Pcolor = color;
+    }
+
     void OnNameChanged(string _Old, string _New)
     {
         playerNameText.text = playerName;
