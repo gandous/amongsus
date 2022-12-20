@@ -71,6 +71,12 @@ public class player_movement : NetworkBehaviour
         playerColor = _col;
     }
 
+    [Client]
+    public void dead()
+    {
+        gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
+    }
+
     void Update()
     {
         if (!isLocalPlayer)

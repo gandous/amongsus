@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Mirror;
 
 public class InteractRaycast : MonoBehaviour
 {
@@ -28,15 +29,26 @@ public class InteractRaycast : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(rayOrigin, cam.transform.forward, out hit, 5)) {
                 FirstPersonMovement move = cam.GetComponentInParent<FirstPersonMovement>();
-                if (move != null) {
-                    //move.disableCameraRot = true;
-                    Debug.Log("Dsiable movement");
+                player_movement player = cam.GetComponentInParent<player_movement>();
+
+                if (player.role == Role.SUS) {
+                    Debug.Log("");
+                    player_movement target_player = hit.collider.GetComponent<player_movement>();
+                    Kill kill_comp = cam.GetComponentInParent<Kill>();
+
+                    if (kill_comp != null) {
+                        kill_comp.makeKill(target_player.playerName);
+                    }
+                } else if (player.role == Role.Victime && obj == null) {
+                    if (move != null) {
+                        //move.disableCameraRot = true;
+                        Debug.Log("Dsiable movement");
+                    }
+                    Interactable interactable = hit.collider.GetComponent<Interactable>();
+                    if (interactable != null) {
+                        interaction(interactable);
+                    }
                 }
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-                if (interactable != null) {
-                    interaction(interactable);
-                }
-            } else {
             }
 
         }

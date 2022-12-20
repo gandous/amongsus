@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1697009884963414263}
   - component: {fileID: 2620389401393228948}
   - component: {fileID: 264182447839878547}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,8 @@ GameObject:
   - component: {fileID: 5026748689773890716}
   - component: {fileID: 125071138425960325}
   - component: {fileID: 7377135591509543514}
-  m_Layer: 0
+  - component: {fileID: 2853507213582007779}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +264,7 @@ MonoBehaviour:
   syncInterval: 0.1
   playerNameText: {fileID: 264182447839878547}
   floatingInfo: {fileID: 6211444500075245206}
-  role: Victime
+  role: 0
   playerName: pipytrax
   playerColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!143 &125071138425960325
@@ -304,6 +305,22 @@ MonoBehaviour:
   gravity: 50
   lookSpeed: 2
   lookXLimit: 45
+--- !u!114 &2853507213582007779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175512977382039938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0e6d0f42368db439584af3e319ac9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  deadBody: {fileID: 6660535123140526995, guid: 8faa6112d504c464199abdec2b86bd8d, type: 3}
 --- !u!1 &6211444500075245206
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6468722675535338392}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
