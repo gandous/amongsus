@@ -9,6 +9,11 @@ public enum Role {
     SUS = 1,
 }
 
+public class PlayerInfo
+{
+    public Color PlayerColor;
+}
+
 public class player_movement : NetworkBehaviour
 {
     public static string[] roleString = {"Victime", "AmongSUSImposter"};
@@ -31,9 +36,14 @@ public class player_movement : NetworkBehaviour
 
     internal void SetColor(Color color)
     {
-        //connectionToServer.authenticationData
+        PlayerInfo infos = (PlayerInfo)connectionToClient.authenticationData;
+        if(infos == null)
+        {
+            infos = new PlayerInfo();
+            connectionToClient.authenticationData = infos;
+            ((PlayerInfo)connectionToClient.authenticationData).PlayerColor = color;
+        }
         playerColor = color;
-        CmdSetupPlayer(Pname, color);
     }
 
     void OnNameChanged(string _Old, string _New)
@@ -61,16 +71,17 @@ public class player_movement : NetworkBehaviour
         if (GameManager.Instance)
             GameManager.Instance.AddPlayer(this);
 
+        if (isClient) 
+        {
+            PlayerInfo infos = (PlayerInfo)connectionToClient.authenticationData;
+            if(infos != null)
+            {
+                playerColor = infos.PlayerColor;
+            }
+        }
         Pname = "bgDu" + UnityEngine.Random.Range(11, 99);
         floatingInfo.transform.localPosition = new Vector3(0, 1.2f, 0.2f);
-        CmdSetupPlayer(Pname, Pcolor);
-    }
-
-    [Command]
-    public void CmdSetupPlayer(string _name, Color _col)
-    {
-        playerName = _name;
-        playerColor = _col;
+        playerName = Pname;
     }
 
     [Client]
