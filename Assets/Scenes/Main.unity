@@ -169,7 +169,7 @@ PrefabInstance:
     - target: {fileID: 3616200347928654358, guid: 0ee16acc410890440a9c6c0df9d7ea25, type: 3}
       propertyPath: manager
       value: 
-      objectReference: {fileID: 1086370958}
+      objectReference: {fileID: 0}
     - target: {fileID: 3616200347928654358, guid: 0ee16acc410890440a9c6c0df9d7ea25, type: 3}
       propertyPath: NetworkManager
       value: 
@@ -381,8 +381,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1086370955}
-  - component: {fileID: 1086370958}
   - component: {fileID: 1086370956}
+  - component: {fileID: 1086370958}
   - component: {fileID: 1086370957}
   m_Layer: 0
   m_Name: NetworkManager
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1086370953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 615e6c6589cf9e54cad646b5a11e0529, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
@@ -474,17 +474,9 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 1175512977382039938, guid: a8bebb2b8082a2f47b9f617bba1e7dc2, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs: []
   timeInterpolationGui: 0
-  showRoomGUI: 1
-  minPlayers: 1
-  roomPlayerPrefab: {fileID: 8163333501504829112, guid: d5ec4c3c49ed7f643ab8db79ef64b32e, type: 3}
-  RoomScene: Assets/Scenes/Lobby.unity
-  GameplayScene: Assets/Scenes/Game.unity
-  _allPlayersReady: 0
-  roomSlots: []
-  clientIndex: 0
 --- !u!1 &1565718699
 GameObject:
   m_ObjectHideFlags: 0

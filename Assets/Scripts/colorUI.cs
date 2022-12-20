@@ -68,7 +68,4 @@ public class colorUI : NetworkBehaviour
 
         player.SetColor(ColorChoices[color]);
     }
-    void Update()
-    {
-    }
 }

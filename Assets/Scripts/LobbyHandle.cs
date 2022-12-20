@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class LobbyHandle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Button StartButton;
     // Update is called once per frame
     void Update()
     {

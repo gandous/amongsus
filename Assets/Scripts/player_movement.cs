@@ -105,4 +105,5 @@ public class player_movement : NetworkBehaviour
 //                characterController = GetComponent<CharacterController>();
         }
     }
+    
 }

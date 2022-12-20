@@ -265,6 +265,7 @@ MonoBehaviour:
   playerNameText: {fileID: 264182447839878547}
   floatingInfo: {fileID: 6211444500075245206}
   role: 0
+  dead: 0
   playerName: pipytrax
   playerColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!143 &125071138425960325
