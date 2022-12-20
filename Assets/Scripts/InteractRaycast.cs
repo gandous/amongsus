@@ -32,7 +32,7 @@ public class InteractRaycast : MonoBehaviour
                 player_movement player = cam.GetComponentInParent<player_movement>();
 
                 if (player.role == Role.SUS) {
-                    Debug.Log("")
+                    Debug.Log("");
                     player_movement target_player = hit.collider.GetComponent<player_movement>();
                     Kill kill_comp = cam.GetComponentInParent<Kill>();
 
