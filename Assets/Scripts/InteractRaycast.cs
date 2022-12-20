@@ -7,6 +7,8 @@ public class InteractRaycast : MonoBehaviour
 {
     private Camera cam;
 
+    private GameObject obj;
+
     void Start()
     {
         cam = GetComponent<Camera>();
@@ -14,7 +16,13 @@ public class InteractRaycast : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Interact")) {
+        if (Input.GetButtonDown("Cancel") && obj != null) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Destroy(obj);
+            obj = null;
+        }
+        if (Input.GetButtonDown("Interact") && obj == null) {
             Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
             RaycastHit hit;
@@ -26,11 +34,28 @@ public class InteractRaycast : MonoBehaviour
                 }
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
                 if (interactable != null) {
-                    interactable.OnInteraction();
+                    interaction(interactable);
                 }
             } else {
             }
 
         }
+    }
+
+    void interaction(Interactable interactable)
+    {
+        obj = Instantiate(interactable.OnInteraction());
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        Task task = obj.GetComponent<Task>();
+        if (task) {
+            task.OnTaskComplete.AddListener(InteractionComplete);
+        }
+    }
+
+    void InteractionComplete()
+    {
+        Debug.Log("Complete");
     }
 }
