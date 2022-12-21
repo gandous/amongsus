@@ -301,9 +301,9 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  walkingSpeed: 7.5
-  jumpSpeed: 8
-  gravity: 50
+  walkingSpeed: 5
+  jumpSpeed: 12
+  gravity: 45
   lookSpeed: 2
   lookXLimit: 45
 --- !u!114 &2853507213582007779

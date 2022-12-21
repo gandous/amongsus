@@ -169,7 +169,7 @@ PrefabInstance:
     - target: {fileID: 3616200347928654358, guid: 0ee16acc410890440a9c6c0df9d7ea25, type: 3}
       propertyPath: manager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1086370958}
     - target: {fileID: 3616200347928654358, guid: 0ee16acc410890440a9c6c0df9d7ea25, type: 3}
       propertyPath: NetworkManager
       value: 
