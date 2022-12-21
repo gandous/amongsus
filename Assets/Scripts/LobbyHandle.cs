@@ -9,8 +9,11 @@ public class LobbyHandle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp("a") == true)
+        if (Input.GetKeyUp("a") == true) {
+            GameManager.Instance.ClearPlayer();
+            GameManager.Instance.StartGame();
             startGame();
+        }
     }
 
     private void startGame()

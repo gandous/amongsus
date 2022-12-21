@@ -71,7 +71,7 @@ public class player_movement : NetworkBehaviour
         if (GameManager.Instance)
             GameManager.Instance.AddPlayer(this);
 
-        if (isClient) 
+        if (isClient && connectionToClient != null && connectionToClient.authenticationData != null)
         {
             PlayerInfo infos = (PlayerInfo)connectionToClient.authenticationData;
             if(infos != null)

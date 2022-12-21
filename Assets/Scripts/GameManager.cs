@@ -22,9 +22,19 @@ public class GameManager : MonoBehaviour
 
     public static Action OnStartGame;
 
-    IEnumerator Start()
+    void Start()
     {
+        DontDestroyOnLoad(this);
         NetworkClient.RegisterHandler<StartMessage>(OnStartMessage);
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine("StartGameCoro");
+    }
+
+    IEnumerator StartGameCoro()
+    {
         while (NetworkServer.active == false)
             yield return null;
 
@@ -38,11 +48,19 @@ public class GameManager : MonoBehaviour
 
         NetworkServer.SendToReady(new StartMessage());
     }
-    
+
     public void AddPlayer(player_movement player)
     {
         print("player added");
         _players.Add(player);
+    }
+
+    public void ClearPlayer()
+    {
+        for (int i = 0; i < _players.Count; i++) {
+            NetworkServer.Destroy(_players[i].gameObject);
+        }
+        _players.Clear();
     }
 
     private void OnStartMessage(StartMessage message)
