@@ -27,12 +27,13 @@ public class Kill : NetworkBehaviour
         if (target_player.dead == true)
             return;
         Debug.Log("kill");
+        target_player.dead = true;
         Transform target_transform = target_player.GetComponent<Transform>();
         Vector3 pos = target_transform.position;
         pos.y -= 0.5f;
         GameObject body = Instantiate(deadBody, pos, new Quaternion());
-        //NetworkManager.Destroy(target_player.GetComponent<MeshFilter>());
-        //NetworkManager.Destroy(target_player.GetComponent<MeshRenderer>());
+        NetworkManager.Destroy(target_player.GetComponent<MeshFilter>());
+        NetworkManager.Destroy(target_player.GetComponent<MeshRenderer>());
         NetworkServer.Spawn(body);
         target_player.Dead();
         target_player.dead = true;

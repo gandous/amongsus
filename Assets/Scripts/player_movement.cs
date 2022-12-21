@@ -27,6 +27,7 @@ public class player_movement : NetworkBehaviour
     [SyncVar]
     public Role role = Role.Victime;
 
+    [SyncVar]
     public bool dead = false;
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName;

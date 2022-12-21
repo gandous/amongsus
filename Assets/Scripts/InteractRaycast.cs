@@ -35,17 +35,17 @@ public class InteractRaycast : MonoBehaviour
                     player_movement target_player = hit.collider.GetComponent<player_movement>();
                     Kill kill_comp = cam.GetComponentInParent<Kill>();
 
-                    if (kill_comp != null) {
+                    if (kill_comp != null && target_player != null) {
                         kill_comp.makeKill(target_player.playerName);
                     }
                 } else if (player.role == Role.Victime && obj == null) {
-                    if (move != null) {
-                        //move.disableCameraRot = true;
-                        Debug.Log("Dsiable movement");
-                    }
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
                     if (interactable != null) {
                         interaction(interactable);
+                        if (move != null) {
+                            //move.disableCameraRot = true;
+                            Debug.Log("Dsiable movement");
+                        }
                     }
                 }
             }
