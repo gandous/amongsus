@@ -32,14 +32,14 @@ public class InteractRaycast : MonoBehaviour
                 FirstPersonMovement move = cam.GetComponentInParent<FirstPersonMovement>();
                 player_movement player = cam.GetComponentInParent<player_movement>();
 
-                if (player.role == Role.SUS) {
+                /*if (player.role == Role.SUS) {
                     player_movement target_player = hit.collider.GetComponent<player_movement>();
                     Kill kill_comp = cam.GetComponentInParent<Kill>();
 
                     if (kill_comp != null && target_player != null) {
                         kill_comp.makeKill(target_player.playerName);
                     }
-                } else if (player.role == Role.Victime && obj == null) {
+                } else */if (/*player.role == Role.Victime && */obj == null) {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
                     if (interactable != null) {
                         interaction(interactable);
