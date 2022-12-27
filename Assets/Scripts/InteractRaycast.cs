@@ -6,6 +6,7 @@ using Mirror;
 
 public class InteractRaycast : MonoBehaviour
 {
+    public const float InteractDistance = 5.0f;
     private Camera cam;
 
     private GameObject obj;
@@ -27,7 +28,7 @@ public class InteractRaycast : MonoBehaviour
             Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
             RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, cam.transform.forward, out hit, 5)) {
+            if (Physics.Raycast(rayOrigin, cam.transform.forward, out hit, InteractDistance)) {
                 FirstPersonMovement move = cam.GetComponentInParent<FirstPersonMovement>();
                 player_movement player = cam.GetComponentInParent<player_movement>();
 

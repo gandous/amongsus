@@ -26,16 +26,21 @@ public class Kill : NetworkBehaviour
         player_movement target_player = GameManager.Instance.Players[i];
         if (target_player.dead == true)
             return;
+        Transform target_transform = target_player.GetComponent<Transform>();
+        Transform source_transform = GetComponent<Transform>();
+        if (Vector3.Distance(source_transform.position, target_transform.position) > InteractRaycast.InteractDistance)
+            return;
         Debug.Log("kill");
         target_player.dead = true;
-        Transform target_transform = target_player.GetComponent<Transform>();
         Vector3 pos = target_transform.position;
         pos.y -= 0.5f;
         GameObject body = Instantiate(deadBody, pos, new Quaternion());
-        NetworkManager.Destroy(target_player.GetComponent<MeshFilter>());
-        NetworkManager.Destroy(target_player.GetComponent<MeshRenderer>());
+        Debug.Log(target_player.GetComponent<MeshFilter>());
         NetworkServer.Spawn(body);
         target_player.Dead();
+        gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
+        NetworkManager.Destroy(target_player.GetComponent<MeshFilter>());
+        NetworkManager.Destroy(target_player.GetComponent<MeshRenderer>());
         target_player.dead = true;
     }
 }

@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6664347736228930810, guid: 0ee16acc410890440a9c6c0df9d7ea25, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -225.39099
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee16acc410890440a9c6c0df9d7ea25, type: 3}
 --- !u!1 &874526748
@@ -466,7 +470,7 @@ MonoBehaviour:
   autoStartServerBuild: 1
   autoConnectClientBuild: 0
   sendRate: 30
-  offlineScene: 
+  offlineScene: Assets/Scenes/Main.unity
   onlineScene: Assets/Scenes/Lobby.unity
   transport: {fileID: 1086370956}
   networkAddress: localhost

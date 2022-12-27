@@ -85,10 +85,13 @@ public class player_movement : NetworkBehaviour
         playerName = Pname;
     }
 
-    [Client]
+    [ClientRpc]
     public void Dead()
     {
+        Debug.Log("Dead");
         gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
+        NetworkManager.Destroy(GetComponent<MeshFilter>());
+        NetworkManager.Destroy(GetComponent<MeshRenderer>());
     }
 
     void Update()
