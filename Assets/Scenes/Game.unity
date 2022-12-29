@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cap_collider: {fileID: 601774703}
-  ui: {fileID: 7524125830387872049, guid: c7d434c75b79b9140888b90812b38c92, type: 3}
+  ui: {fileID: 5571814121721317735, guid: 7ad2befb95d4a6645819cac4bbd87fa4, type: 3}
 --- !u!136 &601774703
 CapsuleCollider:
   m_ObjectHideFlags: 0

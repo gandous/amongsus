@@ -42,9 +42,9 @@ public class SwipeCard : Task
         if (comp_slider.value > 0.95 && focus) {
             float diff = Time.time - start_time;
             if (Mathf.Abs(diff - AllowedTime) < AllowedTimeDiff) {
-                Debug.Log("ok");
                 OnTaskComplete.Invoke();
                 focus = false;
+                text.text = "Success!";
             } else if (diff > AllowedTime) {
                 text.text = "Too slow!";
             } else if (diff < AllowedTime) {
