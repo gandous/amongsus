@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private CapsuleCollider cap_collider;
     [SerializeField] private GameObject ui;
+    [SerializeField] public string id;
 
     // Start is called before the first frame update
     void Start()

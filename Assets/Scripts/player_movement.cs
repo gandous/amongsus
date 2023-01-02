@@ -21,6 +21,8 @@ public class player_movement : NetworkBehaviour
     public TextMesh playerNameText;
     public GameObject floatingInfo;
     private Material playerMaterialClone;
+    [SyncVar]
+    public List<string> taskList;
 
     string Pname;
     Color Pcolor;
@@ -123,10 +125,25 @@ public class player_movement : NetworkBehaviour
         }
     }
 
+    public void TaskComplete(string id)
+    {
+        taskList.Remove(id);
+        taskInfo.UpdateText(taskList);
+        SendTaskComplete();
+    }
+
     [Command]
-    public void TaskComplete()
+    private void SendTaskComplete()
     {
         GameManager.Instance.TaskComplete();
+    }
+
+    [ClientRpc]
+    public void TaskListChanged(List<string> _new)
+    {
+        if (isLocalPlayer) {
+            taskInfo.UpdateText(_new);
+        }
     }
 
     [Command]
