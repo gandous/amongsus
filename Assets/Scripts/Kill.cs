@@ -34,9 +34,11 @@ public class Kill : NetworkBehaviour
         target_player.dead = true;
         Vector3 pos = target_transform.position;
         pos.y -= 0.5f;
-        GameObject body = Instantiate(deadBody, pos, new Quaternion());
-        Debug.Log(target_player.GetComponent<MeshFilter>());
+        Quaternion rot = Quaternion.Euler(90, 0, 0);
+        GameObject body = Instantiate(deadBody, pos, rot);
+        body.GetComponent<DeadPlayer>().playerName = playerName;
         NetworkServer.Spawn(body);
+        // TODO add dead comp to gamemanager to be able to delete player
         target_player.Dead();
         gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
         NetworkManager.Destroy(target_player.GetComponent<MeshFilter>());
