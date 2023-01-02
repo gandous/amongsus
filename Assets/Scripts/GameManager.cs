@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public List<player_movement> Players => _players;
 
     public static Action OnStartGame;
+    public int totalTask = 3;
+    public int totalTaskComplete = 0;
 
     void Start()
     {
@@ -66,5 +68,13 @@ public class GameManager : MonoBehaviour
     private void OnStartMessage(StartMessage message)
     {
         OnStartGame?.Invoke();
+    }
+
+    public void TaskComplete()
+    {
+        totalTaskComplete++;
+        for (int i = 0; i < _players.Count; i++) {
+            _players[i].UpdateCompleteTask(totalTaskComplete, totalTask);
+        }
     }
 }

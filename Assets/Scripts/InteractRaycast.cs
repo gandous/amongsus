@@ -10,6 +10,7 @@ public class InteractRaycast : MonoBehaviour
     private Camera cam;
 
     private GameObject obj;
+    private player_movement pplayer;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class InteractRaycast : MonoBehaviour
                 FirstPersonMovement move = cam.GetComponentInParent<FirstPersonMovement>();
                 player_movement player = cam.GetComponentInParent<player_movement>();
                 DeadPlayer dead = hit.collider.GetComponent<DeadPlayer>();
+                pplayer = player;
 
                 if (dead != null && player.dead != true) {
                     player.Report(dead.playerName);
@@ -71,6 +73,11 @@ public class InteractRaycast : MonoBehaviour
 
     void InteractionComplete()
     {
-        Debug.Log("Complete");
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Debug.Log("Task complete");
+        Destroy(obj);
+        obj = null;
+        pplayer.TaskComplete();
     }
 }

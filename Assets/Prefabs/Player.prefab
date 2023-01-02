@@ -268,6 +268,8 @@ MonoBehaviour:
   dead: 0
   playerName: pipytrax
   playerColor: {r: 0, g: 0, b: 0, a: 1}
+  taskInfoObject: {fileID: 2771571026129590069, guid: a34bcf1ea6313564b8bf65fce84d8825, type: 3}
+  taskInfo: {fileID: 0}
 --- !u!143 &125071138425960325
 CharacterController:
   m_ObjectHideFlags: 0
