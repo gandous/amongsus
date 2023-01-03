@@ -21,6 +21,8 @@ public class player_movement : NetworkBehaviour
     public TextMesh playerNameText;
     public GameObject floatingInfo;
     private Material playerMaterialClone;
+    [SyncVar]
+    public List<string> taskList;
 
     string Pname;
     Color Pcolor;
@@ -34,6 +36,9 @@ public class player_movement : NetworkBehaviour
 
     [SyncVar(hook = nameof(OnColorChanged))]
     public Color playerColor = Color.white;
+
+    [SerializeField] public GameObject taskInfoObject;
+    public TaskInfo taskInfo;
 
     internal void SetColor(Color color)
     {
@@ -67,6 +72,8 @@ public class player_movement : NetworkBehaviour
             Local = this;
             Camera.main.transform.SetParent(transform);
             Camera.main.transform.localPosition = new Vector3(0, 0.5f, 0);
+            GameObject obj = Instantiate(taskInfoObject);
+            taskInfo = obj.GetComponent<TaskInfo>();
         }
 
         if (GameManager.Instance)
@@ -109,7 +116,35 @@ public class player_movement : NetworkBehaviour
 //                characterController = GetComponent<CharacterController>();
         }
     }
-    
+
+    [ClientRpc]
+    public void UpdateCompleteTask(int complete, int total)
+    {
+        if (isLocalPlayer) {
+            taskInfo.UpdateSlider(complete, total);
+        }
+    }
+
+    public void TaskComplete(string id)
+    {
+        taskList.Remove(id);
+        taskInfo.UpdateText(taskList);
+        SendTaskComplete();
+    }
+
+    [Command]
+    private void SendTaskComplete()
+    {
+        GameManager.Instance.TaskComplete();
+    }
+
+    [ClientRpc]
+    public void TaskListChanged(List<string> _new)
+    {
+        if (isLocalPlayer) {
+            taskInfo.UpdateText(_new);
+        }
+    }
 
     [Command]
     public void Report(string aname)

@@ -11,7 +11,12 @@ public struct StartMessage : NetworkMessage
 
 public class GameManager : MonoBehaviour
 {
+    const int TaskPerUser = 2;
     public static GameManager Instance;
+
+
+    [SerializeField]
+    public GameObject taskLists;
     private void Awake()
     {
         Instance = this;
@@ -21,6 +26,8 @@ public class GameManager : MonoBehaviour
     public List<player_movement> Players => _players;
 
     public static Action OnStartGame;
+    public int totalTask = 0;
+    public int totalTaskComplete = 0;
 
     void Start()
     {
@@ -47,6 +54,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         NetworkServer.SendToReady(new StartMessage());
+        AsignTask();
     }
 
     public void AddPlayer(player_movement player)
@@ -66,5 +74,38 @@ public class GameManager : MonoBehaviour
     private void OnStartMessage(StartMessage message)
     {
         OnStartGame?.Invoke();
+    }
+
+    public void TaskComplete()
+    {
+        totalTaskComplete++;
+        SendTaskUpdate();
+    }
+
+    private void SendTaskUpdate()
+    {
+        for (int i = 0; i < _players.Count; i++) {
+            _players[i].UpdateCompleteTask(totalTaskComplete, totalTask);
+        }
+    }
+
+    private void AsignTask()
+    {
+        Transform tasks = taskLists.transform;
+        int differentTaskCount = tasks.childCount;
+        for (int i = 0; i < _players.Count; i++) {
+            if (_players[i].role == Role.SUS)
+                continue;
+            List<string> playerTasks = new List<string>();
+            while (_players[i].taskList.Count < TaskPerUser) {
+                string id = tasks.GetChild(UnityEngine.Random.Range(0, differentTaskCount)).GetComponent<Interactable>().id;
+                if (!playerTasks.Contains(id))
+                    playerTasks.Add(id);
+                _players[i].taskList = playerTasks;
+                _players[i].TaskListChanged(playerTasks);
+            }
+            totalTask += playerTasks.Count;
+        }
+        SendTaskUpdate();
     }
 }

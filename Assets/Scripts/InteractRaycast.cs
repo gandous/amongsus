@@ -10,6 +10,8 @@ public class InteractRaycast : MonoBehaviour
     private Camera cam;
 
     private GameObject obj;
+    private Interactable interact;
+    private player_movement pplayer;
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class InteractRaycast : MonoBehaviour
             Cursor.visible = false;
             Destroy(obj);
             obj = null;
+            interact = null;
         }
         if (Input.GetButtonDown("Interact")) {
             Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
@@ -32,6 +35,7 @@ public class InteractRaycast : MonoBehaviour
                 FirstPersonMovement move = cam.GetComponentInParent<FirstPersonMovement>();
                 player_movement player = cam.GetComponentInParent<player_movement>();
                 DeadPlayer dead = hit.collider.GetComponent<DeadPlayer>();
+                pplayer = player;
 
                 if (dead != null && player.dead != true) {
                     player.Report(dead.playerName);
@@ -44,6 +48,8 @@ public class InteractRaycast : MonoBehaviour
                     }
                 } else if (player.role == Role.Victime && obj == null) {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
+                        print("interact");
+                        print(interactable);
                     if (interactable != null) {
                         interaction(interactable);
                         if (move != null) {
@@ -62,6 +68,7 @@ public class InteractRaycast : MonoBehaviour
         obj = Instantiate(interactable.OnInteraction());
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        interact = interactable;
 
         Task task = obj.GetComponent<Task>();
         if (task) {
@@ -71,6 +78,12 @@ public class InteractRaycast : MonoBehaviour
 
     void InteractionComplete()
     {
-        Debug.Log("Complete");
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Debug.Log("Task complete");
+        pplayer.TaskComplete(interact.id);
+        Destroy(obj);
+        interact = null;
+        obj = null;
     }
 }

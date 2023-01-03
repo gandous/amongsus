@@ -220,6 +220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d9dde88e84db24b94011557272bacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskLists: {fileID: 4320128852497389533, guid: 1e31c0367f939734fb08792d23d31a9e, type: 3}
+  totalTask: 0
+  totalTaskComplete: 0
 --- !u!4 &442552268
 Transform:
   m_ObjectHideFlags: 0

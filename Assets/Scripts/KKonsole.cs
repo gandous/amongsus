@@ -5,7 +5,7 @@ using UnityEngine;
 public class KKonsole : MonoBehaviour
 {
     string myLog = "*begin log";
-    bool doShow = true;
+    bool doShow = false;
     int kChars = 700;
     void OnEnable() { Application.logMessageReceived += Log; }
     void OnDisable() { Application.logMessageReceived -= Log; }
