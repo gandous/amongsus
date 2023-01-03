@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public List<player_movement> Players => _players;
 
     public static Action OnStartGame;
+    public static event Action<player_movement> OnPlayerReport;
     public int totalTask = 0;
     public int totalTaskComplete = 0;
 
