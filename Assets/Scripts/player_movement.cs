@@ -165,6 +165,6 @@ public class player_movement : NetworkBehaviour
     [ClientRpc]
     public void RpcVote(player_movement playerVoted)
     {
-        OnPlayerVote?.Invoke(playerVote);
+        OnPlayerVote?.Invoke(playerVoted);
     }
 }

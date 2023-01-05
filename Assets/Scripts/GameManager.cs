@@ -9,9 +9,10 @@ public struct StartMessage : NetworkMessage
 
 }
 
-public struct PlayerVote
+public struct PlayerVoteStruct
 {
     public player_movement Player;
+    public player_movement Target;
 }
 
 public class GameManager : MonoBehaviour
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private List<player_movement> _players = new List<player_movement>();
     public List<player_movement> Players => _players;
-    private List<>
+//    private List<>
 
     public static Action OnStartGame;
     public static event Action<player_movement> OnPlayerReport;
