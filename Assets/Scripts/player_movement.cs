@@ -40,6 +40,8 @@ public class player_movement : NetworkBehaviour
     [SerializeField] public GameObject taskInfoObject;
     public TaskInfo taskInfo;
 
+    public event Action<player_movement> OnPlayerVote;
+
     internal void SetColor(Color color)
     {
         PlayerInfo infos = (PlayerInfo)connectionToClient.authenticationData;
@@ -152,5 +154,17 @@ public class player_movement : NetworkBehaviour
         int i = 0;
         for (; i < GameManager.Instance.Players.Count && GameManager.Instance.Players[i].playerName != aname; i++);
         Debug.Log($"report -> {aname}");
+    }
+
+    [Command]
+    public void CmdVote(player_movement playerVoted)
+    {
+
+    }
+
+    [ClientRpc]
+    public void RpcVote(player_movement playerVoted)
+    {
+        OnPlayerVote?.Invoke(playerVote);
     }
 }

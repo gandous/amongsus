@@ -17,11 +17,16 @@ public class PlayerVote : MonoBehaviour
     {
         AcceptButton.gameObject.SetActive(true);
         AcceptButton.onClick.AddListener(AcceptButtonClicked);
+        PlayerBind.OnPlayerVote += OnPlayerVote;
     }
 
     private void AcceptButtonClicked()
     {
-
+        player_movement.Local.CmdVote(player_movement);
     }
 
+    private void OnPlayerVote(player_movement playerAimed)
+    {
+        
+    }
 }

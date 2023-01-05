@@ -9,6 +9,11 @@ public struct StartMessage : NetworkMessage
 
 }
 
+public struct PlayerVote
+{
+    public player_movement Player;
+}
+
 public class GameManager : MonoBehaviour
 {
     const int TaskPerUser = 2;
@@ -24,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     private List<player_movement> _players = new List<player_movement>();
     public List<player_movement> Players => _players;
+    private List<>
 
     public static Action OnStartGame;
     public static event Action<player_movement> OnPlayerReport;

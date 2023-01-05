@@ -53,9 +53,13 @@ public class Vote : MonoBehaviour
     {
         foreach(PlayerVote player in _players)
         {
-            if(player != playerVote)
+            if (player != playerVote)
             {
                 player.AcceptButton.gameObject.SetActive(false);
+            }
+            else if (player_movement.Local.dead == false)
+            {
+                player.AcceptButton.gameObject.SetActive(true);
             }
         }
     }
