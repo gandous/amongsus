@@ -11,8 +11,8 @@ public struct StartMessage : NetworkMessage
 
 public struct PlayerVoteStruct
 {
-    public player_movement Player;
-    public player_movement Target;
+    public player_movement Voter;
+    public player_movement Voted;
 }
 
 public class GameManager : MonoBehaviour
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private List<player_movement> _players = new List<player_movement>();
     public List<player_movement> Players => _players;
-    // private List<>
+    private List<PlayerVoteStruct> _votes = new List<PlayerVoteStruct>();
 
     public static Action OnStartGame;
     public static Action<player_movement> OnPlayerReport;
@@ -115,5 +115,26 @@ public class GameManager : MonoBehaviour
             totalTask += playerTasks.Count;
         }
         SendTaskUpdate();
+    }
+
+    internal bool Vote(player_movement voter, player_movement voted)
+    {
+        if(voter.dead == false && voted.dead == false && _votes.FindIndex(x => x.Voter == voter) == -1)
+        {
+            _votes.Add(new PlayerVoteStruct {Voter = voter, Voted = voted});
+            return true;
+        }
+        return false;
+    }
+
+    internal void CheckEndVotes()
+    {
+        List<player_movement> alivePlayers = new List<player_movement>();;
+        _players.CopyTo(alivePlayers);
+        alivePlayers.Sort((a,b) => a.dead == false ? -1 : 1);
+        if(alivePlayers.Count == _votes.Count)
+        {
+            //faireregfrsf fin
+        }
     }
 }

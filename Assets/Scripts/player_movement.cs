@@ -157,12 +157,17 @@ public class player_movement : NetworkBehaviour
     [Command]
     public void CmdVote(player_movement playerVoted)
     {
-
+        if(GameManager.Instance.Vote(this, playerVoted))
+        {
+            RpcVote(playerVoted);
+            GameManager.Instance.CheckEndVotes();
+        }
     }
 
     [ClientRpc]
     public void RpcVote(player_movement playerVoted)
     {
+        GameManager.Instance.Vote(this, playerVoted);
         OnPlayerVote?.Invoke(playerVoted);
     }
 }

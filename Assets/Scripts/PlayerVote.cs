@@ -22,7 +22,7 @@ public class PlayerVote : MonoBehaviour
 
     private void AcceptButtonClicked()
     {
-//        PlayerBind.Local.CmdVote(player_movement);
+        player_movement.Local.CmdVote(PlayerBind);
     }
 
     private void OnPlayerVote(player_movement playerAimed)
