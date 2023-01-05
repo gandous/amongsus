@@ -30,10 +30,10 @@ public class GameManager : MonoBehaviour
 
     private List<player_movement> _players = new List<player_movement>();
     public List<player_movement> Players => _players;
-//    private List<>
+    // private List<>
 
     public static Action OnStartGame;
-    public static event Action<player_movement> OnPlayerReport;
+    public static Action<player_movement> OnPlayerReport;
     public int totalTask = 0;
     public int totalTaskComplete = 0;
 

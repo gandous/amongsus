@@ -149,11 +149,9 @@ public class player_movement : NetworkBehaviour
     }
 
     [Command]
-    public void Report(string aname)
+    public void Report(string _aname)
     {
-        int i = 0;
-        for (; i < GameManager.Instance.Players.Count && GameManager.Instance.Players[i].playerName != aname; i++);
-        Debug.Log($"report -> {aname}");
+        GameManager.OnPlayerReport?.Invoke(this);
     }
 
     [Command]
