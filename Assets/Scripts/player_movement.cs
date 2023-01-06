@@ -111,13 +111,6 @@ public class player_movement : NetworkBehaviour
             floatingInfo.transform.LookAt(Camera.main.transform);
             return;
         }
-        if (Input.GetKeyUp("t") == true)
-        {
-            print("bit");
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-//                characterController = GetComponent<CharacterController>();
-        }
     }
 
     [ClientRpc]

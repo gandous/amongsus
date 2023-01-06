@@ -35,16 +35,20 @@ public class colorUI : NetworkBehaviour
 
     private void OnColorSelectedChanged(SyncList<ColorChosen>.Operation op, int itemIndex, ColorChosen oldItem, ColorChosen newItem)
     {
+        UpdateButton();
+    }
+
+    private void UpdateButton()
+    {
         _buttons.ForEach(x => x.interactable = true);
         foreach(ColorChosen chose in ColorSelected)
         {
             _buttons[chose.PlayerColor].interactable = false;
         }
     }
-    
+
     private void SelectColor(Color color)
     {
-        print("test");
         player_movement player = player_movement.Local;
         int colorIndex = ColorChoices.FindIndex(x => x == color);
         CmdAskForColor(colorIndex, player);
@@ -67,5 +71,16 @@ public class colorUI : NetworkBehaviour
         ColorSelected.Add(entry);
 
         player.SetColor(ColorChoices[color]);
+    }
+
+    public void PickDefault()
+    {
+        UpdateButton();
+        for (int i = 0; i < ColorChoices.Count; i++) {
+            if (_buttons[i].interactable) {
+                SelectColor(ColorChoices[i]);
+                return;
+            }
+        }
     }
 }
