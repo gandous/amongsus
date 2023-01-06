@@ -12,6 +12,7 @@ public class InteractRaycast : MonoBehaviour
     private GameObject obj;
     private Interactable interact;
     private player_movement pplayer;
+    private bool canKill = true;
 
     void Start()
     {
@@ -39,7 +40,9 @@ public class InteractRaycast : MonoBehaviour
                     Kill kill_comp = cam.GetComponentInParent<Kill>();
                     player_movement target_player = hit.collider.GetComponent<player_movement>();
 
-                    if (kill_comp != null && target_player != null) {
+                    if (kill_comp != null && target_player != null && canKill) {
+                        canKill = false;
+                        StartCoroutine(killCoro());
                         kill_comp.makeKill(target_player.playerName, false);
                     }
                 } else if (player.role == Role.Victime && obj == null) {
@@ -88,5 +91,11 @@ public class InteractRaycast : MonoBehaviour
         interact = null;
         obj = null;
         pplayer.GetComponent<FirstPersonMovement>().movementDisable = false;
+    }
+
+    IEnumerator killCoro()
+    {
+        yield return new WaitForSeconds(20f);
+        canKill = true;
     }
 }
