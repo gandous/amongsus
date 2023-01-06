@@ -19,7 +19,7 @@ public class Kill : NetworkBehaviour
     }
 
     [Command]
-    public void makeKill(string playerName)
+    public void makeKill(string playerName, bool ratiod)
     {
         int i = 0;
         for (; i < GameManager.Instance.Players.Count && GameManager.Instance.Players[i].playerName != playerName; i++);
@@ -28,7 +28,7 @@ public class Kill : NetworkBehaviour
             return;
         Transform target_transform = target_player.GetComponent<Transform>();
         Transform source_transform = GetComponent<Transform>();
-        if (Vector3.Distance(source_transform.position, target_transform.position) > InteractRaycast.InteractDistance)
+        if (Vector3.Distance(source_transform.position, target_transform.position) > InteractRaycast.InteractDistance && ratiod == false)
             return;
         Debug.Log("kill");
         target_player.dead = true;
