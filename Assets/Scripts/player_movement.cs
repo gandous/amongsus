@@ -149,9 +149,16 @@ public class player_movement : NetworkBehaviour
     }
 
     [Command]
-    public void Report(string _aname)
+    public void Report()
     {
-        GameManager.OnPlayerReport?.Invoke(this);
+        GameManager.Instance.ReportPlayerServer(this);
+        this.RpcReport(this);
+    }
+
+    [ClientRpc]
+    internal void RpcReport(player_movement reportedBy)
+    {
+        GameManager.Instance.ReportPlayerClient(reportedBy);
     }
 
     [Command]

@@ -10,6 +10,11 @@ public struct StartMessage : NetworkMessage
 
 }
 
+public struct ClearMessage : NetworkMessage
+{
+
+}
+
 public struct VoteDeadMessage : NetworkMessage
 {
     public player_movement PlayerDead;
@@ -39,8 +44,9 @@ public class GameManager : MonoBehaviour
     private List<PlayerVoteStruct> _votes = new List<PlayerVoteStruct>();
 
     public static Action OnStartGame;
+    public static Action OnClearPlayers;
     public static event Action OnVoteEnd;
-    public static Action<player_movement> OnPlayerReport;
+    public static event Action<player_movement> OnPlayerReport;
     public int totalTask = 0;
     public int totalTaskComplete = 0;
 
@@ -48,11 +54,13 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         NetworkClient.RegisterHandler<StartMessage>(OnStartMessage);
+        NetworkClient.RegisterHandler<ClearMessage>(OnClearMessage);
         NetworkClient.RegisterHandler<VoteDeadMessage>(OnVoteDeadReceived);
     }
 
     public void StartGame()
     {
+        NetworkServer.SendToReady(new ClearMessage());
         StartCoroutine("StartGameCoro");
     }
 
@@ -90,6 +98,12 @@ public class GameManager : MonoBehaviour
     private void OnStartMessage(StartMessage message)
     {
         OnStartGame?.Invoke();
+    }
+
+    private void OnClearMessage(ClearMessage message)
+    {
+        ClearPlayer();
+        OnClearPlayers?.Invoke();
     }
 
     private void OnVoteDeadReceived(VoteDeadMessage message)
@@ -138,6 +152,24 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    internal void ReportPlayerServer(player_movement reportedBy)
+    {
+        foreach(player_movement player in _players)
+        {
+            //player.CanMove = false;
+
+            if(player.dead == false)
+            {
+                Transform startPos = NetworkManager.singleton.GetStartPosition();
+            }            
+        }
+    }
+
+    internal void ReportPlayerClient(player_movement deadPlayer)
+    {
+        OnPlayerReport?.Invoke(deadPlayer);
     }
 
     internal void CheckEndVotes()
