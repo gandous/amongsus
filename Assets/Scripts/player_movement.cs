@@ -99,6 +99,7 @@ public class player_movement : NetworkBehaviour
     {
         Debug.Log("Dead");
         gameObject.layer = LayerMask.NameToLayer("DeadPlayer");
+        playerNameText.gameObject.SetActive(false);
         NetworkManager.Destroy(GetComponent<MeshFilter>());
         NetworkManager.Destroy(GetComponent<MeshRenderer>());
     }
