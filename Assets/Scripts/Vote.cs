@@ -33,6 +33,7 @@ public class Vote : MonoBehaviour
     // Update is called once per frame
     private void OnPlayerReport(player_movement playerReported)
     {
+        player_movement.Local.GetComponent<FirstPersonMovement>().movementDisable = true;
         SetGroupActive(true);
         foreach (Transform t in LayoutGroup.transform)
         {
@@ -55,6 +56,7 @@ public class Vote : MonoBehaviour
 
     private void OnVoteEnd()
     {
+        player_movement.Local.GetComponent<FirstPersonMovement>().movementDisable = true;
         GameManager.Instance.CheckWin();
         SetGroupActive(false);
     }
