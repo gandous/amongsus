@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 48
+  controlID: 15
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 49
+  controlID: 16
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 50
+  controlID: 17
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -346,22 +346,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\grane\OneDrive\Documents\GitHub\amongsus
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 76600000
-    m_LastClickedID: 24694
-    m_ExpandedIDs: 000000005e60000000ca9a3b
+    m_SelectedIDs: 2a9a0000
+    m_LastClickedID: 39466
+    m_ExpandedIDs: 00000000665e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -389,7 +389,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000005e600000
+    m_ExpandedIDs: 00000000665e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -414,8 +414,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: c8720000
-    m_LastClickedInstanceID: 29384
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
@@ -519,7 +519,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: cedcfeff1cddfeff12dffeff36dffeffd8dffeffb4e2feff02e3fefff8e4feff1ce5feffbee5feff36e7feff84e7feff7ae9feff9ee9feff40eafeff10effeff5eeffeff54f1feff78f1feff1af2feff2ef7feff96f8feffe4f8feffccfafeffeafafeff9cfbfeff5afdfeffa8fdfeff2afefeff3efefeffe0fefeff90fffeffdefffeffc601ffffe401ffff9602ffffe803ffff3604ffff1e06ffff3c06ffffee06fffffe08ffff560dffffa60dffff9c0fffffc00fffff6210ffff0a15ffff5815ffff5217ffff7a17ffff2018ffffb61dffff1e1fffff6c1fffff5421ffff7221ffff2422ffffd223ffff882cffff442dffff922dffff142effff282effffca2effff7e2fffffcc2fffff4e30ffff6230ffff0431ffffb831ffff0832fffff033ffff0e34ffffc034fffffe38ffff7639ffff363affff4c3cffff9a3cffff903effffb43effff563fffff0046ffff4e46ffffd046ffffe446ffff8647ffff7e48ffffcc48ffffb44affffd44affff764bfffffa4fffff4850ffffde51ffff0252ffffa452ffffb855ffff2257ffff7057ffff0659ffff2a59ffffcc59ffff1260ffff6060fffffa61ffff2262ffffc862ffff9869ffff486bffff986bffff206dffff3e6dfffff06dffff9e72ffff8474ffffd678ffff2479ffffac7affffbe7affff267dffff9480ffffe280ffff6a82ffff7c82ffffe484ffffd888ffff2689ffffae8affffc08affff288dffff3091ffff7e91ffff0693ffff1893ffff8095ffff5499ffff469effffaa9effffaea2fffffca2ffff88a4ffff9ea4ffff0aa7ffff20b3ffffaab4fffff8b4ffff80b6ffff84b6ffff12b9ffff5abaffff02bdffff20c1ffff84c1fffffac6ffff90c8ffffdec8ffff66caffff6acafffff8ccffff96ceffff4ed5ffffbad6ffff08d7ffff84d8ffff90d8ffff14dbffff86dcffffd6dcffff52deffff5edeffffe2e0ffff3ae2ffff8ae2fffface2ffffb0e2ffff18e5ffff8ae6ffffd8e6ffff4ce8ffff58e8ffffdceafffff6f2ffff44f3ffffc4f4ffffd4f4ffff5cf7ffff34fbffff069b00008cc30000aec3000022c40000e0d90000b6100100
+      m_ExpandedIDs: 8c65ffffda65ffff5867ffff7467ffff0668ffff2a68ffffa668ffffe26dffff306effffae6fffffca6fffff5c70ffff8070fffffc70ffffd076ffff1e77ffff3677ffff5077ffffd477ffffe877ffff6478ffff5079ffff9e79ffff1c7bffff387bffffca7bffffee7bffff6a7cffffd07dffff1e7effff367effff507effffd47effffe87effff647fffff4e80ffff9c80ffff1a82ffff3682ffffc882ffffec82ffff6883ffff8c88ffffda88ffff588affff748affff068bffff2a8bffffa68bffff6691ffffb491ffff3293ffff4e93ffffe093ffff0494ffff8094ffff0696ffff789bffffc89bffffba9dffffdc9dffff7e9efffffea5ffff4ca6ffff42a8ffff66a8ffff08a9fffff6acffff44adffff3aafffff5eafffff00b0ffff54b6ffffa2b6ffff24b7ffff38b7ffffdab7ffff90b8ffffdeb8ffffd4bafffff8baffff9abbffff70c0ffffbec0ffffb4c2ffffd8c2ffff7ac3fffffacaffff48cbffffcacbffffdecbffff80ccffff42cdffff90cdffff86cfffffaacfffff4cd0ffff2cd2ffff7ad2ffff70d4ffff94d4ffff36d5ffffe0dfffff20e0ffff16e2ffff3ae2ffffdce2ffff64e7ffffa4e7ffff9ae9ffffbee9ffff60eaffff0cefffff4cefffff42f1ffff66f1ffff08f2ffffa8f6ffffe8f6ffffdef8ffff02f9ffffa4f9ffff38fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -874,7 +874,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.022153651, y: -0.9599389, z: 0.07938356, w: -0.26784977}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 

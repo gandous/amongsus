@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
 
     private void OnVoteDeadReceived(VoteDeadMessage message)
     {
+        _votes.Clear();
         OnVoteEnd?.Invoke();
     }
 
@@ -147,9 +148,10 @@ public class GameManager : MonoBehaviour
 
     internal bool Vote(player_movement voter, player_movement voted)
     {
+        print("testVotes");
         if (voted == null && voter.dead == false)
         {
-            _votes.Add(new PlayerVoteStruct {Voter = voter, Voted = voted});
+            _votes.Add(new PlayerVoteStruct {Voter = voter, Voted = null});
             return true;
         }
         else if(voter.dead == false && voted.dead == false && _votes.FindIndex(x => x.Voter == voter) == -1)
@@ -181,6 +183,8 @@ public class GameManager : MonoBehaviour
     internal void CheckEndVotes()
     {
         int alivePlayers = _players.Where(s => s.dead == false).Count();
+        print(alivePlayers);
+        print(_votes.Count());
         if(alivePlayers == _votes.Count)
         {
             print("testccsdcez");
@@ -203,24 +207,29 @@ public class GameManager : MonoBehaviour
                     votes.Add(vote.Voted, 1);
                 }
             }
-            if (votes.Count < 1)
+            if (votes.Count < 1) {
+                _votes.Clear();
                 NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
+            }
             else
             {
                 List<KeyValuePair<player_movement, int>> order = votes.OrderByDescending(x => x.Value).ToList();
-                if (order[0].Value <= skips)
+                if (order[0].Value <= skips) {
+                    _votes.Clear();
                     NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
+                }
                 else if(order.Count() <= 1 || order[0].Value != order[1].Value)
                 {
                     player_movement player = order[0].Key;
                     //player.CanMove = false;
                     player_movement useless = player_movement.Local;
                     useless.GetComponent<Kill>().makeKill(player.playerName, true);
-
+                    _votes.Clear();
                     NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = player });
                 }
                 else
                 {
+                    _votes.Clear();
                     NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
                 }
             }
