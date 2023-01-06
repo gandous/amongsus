@@ -10,6 +10,7 @@ public class FirstPersonMovement : NetworkBehaviour
     public float gravity = 20.0f;
     public float lookSpeed = 2.0f; 
     public float lookXLimit = 45.0f;
+    public bool movementDisable;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -21,11 +22,12 @@ public class FirstPersonMovement : NetworkBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        movementDisable = false;
     }
 
     void Update()
     {
-        if (isOwned) {
+        if (isOwned && !movementDisable) {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
             float curSpeedX = walkingSpeed * Input.GetAxis("Vertical");
