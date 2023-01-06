@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public enum Role {
     Victime = 0,
@@ -19,7 +20,7 @@ public class player_movement : NetworkBehaviour
 {
     public static string[] roleString = {"Victime", "AmongSUSImposter"};
     public static player_movement Local;
-    public TextMesh playerNameText;
+    public TMP_Text playerNameText;
     public GameObject floatingInfo;
     private Material playerMaterialClone;
     [SyncVar]
@@ -120,11 +121,11 @@ public class player_movement : NetworkBehaviour
     {
         if (isLocalPlayer) {
             taskInfo.UpdateSlider(complete, total);
-            if (complete == total) {
+            /*if (complete == total) {
                 SceneManager.LoadScene("CrewmateWin");
                 Destroy(GameObject.FindWithTag("DontDestroyOnLoad"));
                 Destroy(GameObject.FindWithTag("GameManager"));
-            }
+            }*/
         }
     }
 
