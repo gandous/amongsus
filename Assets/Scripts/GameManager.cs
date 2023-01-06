@@ -166,8 +166,6 @@ public class GameManager : MonoBehaviour
     {
         foreach(player_movement player in _players)
         {
-            player.GetComponent<FirstPersonMovement>().movementDisable = true;
-
             if(player.dead == false)
             {
                 Transform startPos = NetworkManager.singleton.GetStartPosition();
@@ -188,10 +186,7 @@ public class GameManager : MonoBehaviour
         if(alivePlayers == _votes.Count)
         {
             print("testccsdcez");
-            foreach(player_movement player in _players)
-            {
-                player.GetComponent<FirstPersonMovement>().movementDisable = false;
-            }
+
             Dictionary<player_movement, int> votes = new Dictionary<player_movement, int>();
             int skips = 0;
             foreach(PlayerVoteStruct vote in _votes)
