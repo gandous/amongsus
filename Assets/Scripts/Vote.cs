@@ -32,7 +32,6 @@ public class Vote : MonoBehaviour
     private void OnPlayerReport(player_movement playerReported)
     {
         SetGroupActive(true);
-
         foreach (Transform t in LayoutGroup.transform)
         {
             Destroy(t.gameObject);
@@ -45,6 +44,7 @@ public class Vote : MonoBehaviour
             PlayerVote playerUI = Instantiate(PlayerPrefab, LayoutGroup.transform);
             playerUI._vote = this;
             playerUI.PlayerBind = player;
+            playerUI.name = player.name;
             playerUI.AcceptButton.interactable = player.dead == false;
 
             _players.Add(playerUI);
@@ -56,25 +56,12 @@ public class Vote : MonoBehaviour
         SetGroupActive(false);
     }
 
-    internal void StartClick(PlayerVote playerVote)
-    {
-        foreach(PlayerVote player in _players)
-        {
-            if (player != playerVote)
-            {
-                player.AcceptButton.gameObject.SetActive(false);
-            }
-            else if (player_movement.Local.dead == false)
-            {
-                player.AcceptButton.gameObject.SetActive(true);
-            }
-        }
-    }
-
     internal void SetGroupActive(bool state)
     {
         Group.alpha = state ? 1 : 0;
         Group.interactable = state;
         Group.blocksRaycasts = state;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

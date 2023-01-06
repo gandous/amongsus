@@ -174,10 +174,9 @@ public class GameManager : MonoBehaviour
 
     internal void CheckEndVotes()
     {
-        List<player_movement> alivePlayers = new List<player_movement>();;
-        _players.CopyTo(alivePlayers);
-        alivePlayers.Sort((a,b) => a.dead == false ? -1 : 1);
-        if(alivePlayers.Count == _votes.Count)
+        int alivePlayers = _players.Where(s => s.dead == false).Count();
+        print(alivePlayers);
+        if(alivePlayers == _votes.Count)
         {
             foreach(player_movement player in _players)
             {
