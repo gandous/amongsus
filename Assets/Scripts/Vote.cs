@@ -46,7 +46,7 @@ public class Vote : MonoBehaviour
             PlayerVote playerUI = Instantiate(PlayerPrefab, LayoutGroup.transform);
             playerUI._vote = this;
             playerUI.PlayerBind = player;
-            playerUI.PlayerName.text = player.name;
+            playerUI.PlayerName.text = player.playerName;
             playerUI.AcceptButton.interactable = player.dead == false;
 
             _players.Add(playerUI);
@@ -55,8 +55,6 @@ public class Vote : MonoBehaviour
 
     private void OnVoteEnd()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         SetGroupActive(false);
     }
 
@@ -65,8 +63,16 @@ public class Vote : MonoBehaviour
         Group.alpha = state ? 1 : 0;
         Group.interactable = state;
         Group.blocksRaycasts = state;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        if (state == true)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     private void SkipButtonClicked()

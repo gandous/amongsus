@@ -158,6 +158,7 @@ public class player_movement : NetworkBehaviour
     [Command]
     public void CmdVote(player_movement playerVoted)
     {
+        print("click");
         if(GameManager.Instance.Vote(this, playerVoted))
         {
             RpcVote(playerVoted);

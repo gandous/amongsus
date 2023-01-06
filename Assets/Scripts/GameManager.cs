@@ -149,8 +149,9 @@ public class GameManager : MonoBehaviour
         if (voted == null && voter.dead == false)
         {
             _votes.Add(new PlayerVoteStruct {Voter = voter, Voted = voted});
+            return true;
         }
-        if(voter.dead == false && voted.dead == false && _votes.FindIndex(x => x.Voter == voter) == -1)
+        else if(voter.dead == false && voted.dead == false && _votes.FindIndex(x => x.Voter == voter) == -1)
         {
             _votes.Add(new PlayerVoteStruct {Voter = voter, Voted = voted});
             return true;
@@ -181,17 +182,18 @@ public class GameManager : MonoBehaviour
         int alivePlayers = _players.Where(s => s.dead == false).Count();
         if(alivePlayers == _votes.Count)
         {
+            print("testccsdcez");
             foreach(player_movement player in _players)
             {
-                if (player.dead == false)
-                {
-                    //player.CanMove = true;
-                }
+                //player.CanMove = true;
             }
             Dictionary<player_movement, int> votes = new Dictionary<player_movement, int>();
+            int skips = 0;
             foreach(PlayerVoteStruct vote in _votes)
             {
-                if (votes.ContainsKey(vote.Voted))
+                if (vote.Voted == null)
+                    skips += 1;
+                else if (votes.ContainsKey(vote.Voted))
                 {
                     ++votes[vote.Voted];
                 }
@@ -200,19 +202,26 @@ public class GameManager : MonoBehaviour
                     votes.Add(vote.Voted, 1);
                 }
             }
-            List<KeyValuePair<player_movement, int>> order = votes.OrderByDescending(x => x.Value).ToList();
-            if(order.Count() <= 1 || order[0].Value != order[1].Value)
-            {
-                player_movement player = order[0].Key;
-                //player.CanMove = false;
-                player_movement useless = player_movement.Local;
-                useless.GetComponent<Kill>().makeKill(player.playerName, true);
-
-                NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = player });
-            }
+            if (votes.Count < 1)
+                NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
             else
             {
-                NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
+                List<KeyValuePair<player_movement, int>> order = votes.OrderByDescending(x => x.Value).ToList();
+                if (order[0].Value <= skips)
+                    NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
+                else if(order.Count() <= 1 || order[0].Value != order[1].Value)
+                {
+                    player_movement player = order[0].Key;
+                    //player.CanMove = false;
+                    player_movement useless = player_movement.Local;
+                    useless.GetComponent<Kill>().makeKill(player.playerName, true);
+
+                    NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = player });
+                }
+                else
+                {
+                    NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
+                }
             }
         }
     }
