@@ -230,6 +230,7 @@ MonoBehaviour:
   Group: {fileID: 41932764}
   LayoutGroup: {fileID: 1708274094}
   PlayerPrefab: {fileID: 1298343935968152242, guid: a733d9f4558a1b14ba43c8840a4de49f, type: 3}
+  SkipButton: {fileID: 162861716}
 --- !u!1 &162861714
 GameObject:
   m_ObjectHideFlags: 0
