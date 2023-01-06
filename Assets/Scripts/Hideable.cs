@@ -30,7 +30,9 @@ public class Hideable : MonoBehaviour
         GetComponent<CanvasGroup>().alpha = 0;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        player_movement.Local.GetComponent<FirstPersonMovement>().movementDisable = false;
+        if (player_movement.Local != null) {
+            player_movement.Local.GetComponent<FirstPersonMovement>().movementDisable = false;
+        }
     }
 
     public void UnlockShow()
