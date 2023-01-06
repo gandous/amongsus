@@ -20,11 +20,13 @@ public class Vote : MonoBehaviour
     private void OnEnable()
     {
         GameManager.OnPlayerReport += OnPlayerReport;
+        GameManager.OnVoteEnd += OnVoteEnd;
     }
 
     private void OnDisable()
     {
         GameManager.OnPlayerReport -= OnPlayerReport;
+        GameManager.OnVoteEnd -= OnVoteEnd;
     }
     // Update is called once per frame
     private void OnPlayerReport(player_movement playerReported)
@@ -47,6 +49,11 @@ public class Vote : MonoBehaviour
 
             _players.Add(playerUI);
         }
+    }
+
+    private void OnVoteEnd()
+    {
+        SetGroupActive(false);
     }
 
     internal void StartClick(PlayerVote playerVote)

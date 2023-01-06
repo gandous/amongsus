@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,11 @@ using Mirror;
 public struct StartMessage : NetworkMessage
 {
 
+}
+
+public struct VoteDeadMessage : NetworkMessage
+{
+    public player_movement PlayerDead;
 }
 
 public struct PlayerVoteStruct
@@ -33,6 +39,7 @@ public class GameManager : MonoBehaviour
     private List<PlayerVoteStruct> _votes = new List<PlayerVoteStruct>();
 
     public static Action OnStartGame;
+    public static event Action OnVoteEnd;
     public static Action<player_movement> OnPlayerReport;
     public int totalTask = 0;
     public int totalTaskComplete = 0;
@@ -41,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(this);
         NetworkClient.RegisterHandler<StartMessage>(OnStartMessage);
+        NetworkClient.RegisterHandler<VoteDeadMessage>(OnVoteDeadReceived);
     }
 
     public void StartGame()
@@ -82,6 +90,11 @@ public class GameManager : MonoBehaviour
     private void OnStartMessage(StartMessage message)
     {
         OnStartGame?.Invoke();
+    }
+
+    private void OnVoteDeadReceived(VoteDeadMessage message)
+    {
+        OnVoteEnd?.Invoke();
     }
 
     public void TaskComplete()
@@ -134,7 +147,38 @@ public class GameManager : MonoBehaviour
         alivePlayers.Sort((a,b) => a.dead == false ? -1 : 1);
         if(alivePlayers.Count == _votes.Count)
         {
-            //faireregfrsf fin
+            foreach(player_movement player in _players)
+            {
+                if (player.dead == false)
+                {
+                    //player.CanMove = true;
+                }
+            }
+            Dictionary<player_movement, int> votes = new Dictionary<player_movement, int>();
+            foreach(PlayerVoteStruct vote in _votes)
+            {
+                if (votes.ContainsKey(vote.Voted))
+                {
+                    ++votes[vote.Voted];
+                }
+                else
+                {
+                    votes.Add(vote.Voted, 1);
+                }
+            }
+            List<KeyValuePair<player_movement, int>> order = votes.OrderByDescending(x => x.Value).ToList();
+            if(order.Count() <= 1 || order[0].Value != order[1].Value)
+            {
+                player_movement player = order[0].Key;
+                //player.CanMove = false;
+                player.dead = true;
+
+                NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = player });
+            }
+            else
+            {
+                NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
+            }
         }
     }
 }
