@@ -21,11 +21,7 @@ public class InteractRaycast : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && obj != null) {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            Destroy(obj);
-            obj = null;
-            interact = null;
+            StartCoroutine(completeInter());
         }
         if (Input.GetButtonDown("Interact")) {
             Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
@@ -48,13 +44,13 @@ public class InteractRaycast : MonoBehaviour
                     }
                 } else if (player.role == Role.Victime && obj == null) {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
-                        print("interact");
-                        print(interactable);
                     if (interactable != null) {
-                        interaction(interactable);
-                        if (move != null) {
-                            //move.disableCameraRot = true;
-                            Debug.Log("Dsiable movement");
+                        if (player.taskList.Contains(interactable.id)) {
+                            interaction(interactable);
+                            if (move != null) {
+                                move.movementDisable = true;
+                                Debug.Log("Dsiable movement");
+                            }
                         }
                     }
                 }
@@ -78,12 +74,19 @@ public class InteractRaycast : MonoBehaviour
 
     void InteractionComplete()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         Debug.Log("Task complete");
         pplayer.TaskComplete(interact.id);
+        StartCoroutine(completeInter());
+    }
+
+    IEnumerator completeInter()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         Destroy(obj);
         interact = null;
         obj = null;
+        pplayer.GetComponent<FirstPersonMovement>().movementDisable = false;
     }
 }
