@@ -264,6 +264,7 @@ MonoBehaviour:
   syncInterval: 0.1
   playerNameText: {fileID: 264182447839878547}
   floatingInfo: {fileID: 6211444500075245206}
+  taskList: []
   role: 0
   dead: 0
   playerName: pipytrax
@@ -308,6 +309,7 @@ MonoBehaviour:
   gravity: 45
   lookSpeed: 2
   lookXLimit: 45
+  movementDisable: 0
 --- !u!114 &2853507213582007779
 MonoBehaviour:
   m_ObjectHideFlags: 0
