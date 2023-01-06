@@ -37,6 +37,7 @@ public class Kill : NetworkBehaviour
         Quaternion rot = Quaternion.Euler(90, 0, 0);
         GameObject body = Instantiate(deadBody, pos, rot);
         body.GetComponent<DeadPlayer>().playerName = playerName;
+        body.GetComponent<DeadPlayer>().playerColor = target_player.playerColor;
         NetworkServer.Spawn(body);
         // TODO add dead comp to gamemanager to be able to delete player
         target_player.Dead();

@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckWin()
     {
-        int aliveImposter = _players.Where(s => s.role == Role.SUS && s.dead == false ).Count();
+        /*int aliveImposter = _players.Where(s => s.role == Role.SUS && s.dead == false ).Count();
         int alivePlayer = _players.Where(s => s.dead == false ).Count();
         alivePlayer -= aliveImposter;
 
@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour
             ImposterWin();
         } else if (alivePlayer == 0) {
             CrewmateWin();
-        }
+        }*/
     }
 
     public void CrewmateWin()
