@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
     internal bool Vote(player_movement voter, player_movement voted)
     {
         print("testVotes");
-        if (voted == null && voter.dead == false)
+        if (voted == null && voter.dead == false && _votes.FindIndex(x => x.Voter == voter) == -1)
         {
             _votes.Add(new PlayerVoteStruct {Voter = voter, Voted = null});
             return true;
@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
     {
         foreach(player_movement player in _players)
         {
-            //player.CanMove = false;
+            player.GetComponent<FirstPersonMovement>().movementDisable = true;
 
             if(player.dead == false)
             {
@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
             print("testccsdcez");
             foreach(player_movement player in _players)
             {
-                //player.CanMove = true;
+                player.GetComponent<FirstPersonMovement>().movementDisable = false;
             }
             Dictionary<player_movement, int> votes = new Dictionary<player_movement, int>();
             int skips = 0;
@@ -221,7 +221,6 @@ public class GameManager : MonoBehaviour
                 else if(order.Count() <= 1 || order[0].Value != order[1].Value)
                 {
                     player_movement player = order[0].Key;
-                    //player.CanMove = false;
                     player_movement useless = player_movement.Local;
                     useless.GetComponent<Kill>().makeKill(player.playerName, true);
                     _votes.Clear();
@@ -247,22 +246,18 @@ public class GameManager : MonoBehaviour
 
         if (alivePlayer <= 0) {
             ImposterWin();
-        } else if (alivePlayer == 0) {
+        } else if (aliveImposter == 0) {
             CrewmateWin();
         }
     }
 
     public void CrewmateWin()
     {
-        SceneManager.LoadScene("CrewmateWin");
-        Destroy(GameObject.FindWithTag("DontDestroyOnLoad"));
-        Destroy(GameObject.FindWithTag("GameManager"));
+        NetworkManager.singleton.ServerChangeScene("CrewmateWin");
     }
 
     public void ImposterWin()
     {
-        SceneManager.LoadScene("ImposterWin");
-        Destroy(GameObject.FindWithTag("DontDestroyOnLoad"));
-        Destroy(GameObject.FindWithTag("GameManager"));
+        NetworkManager.singleton.ServerChangeScene("ImposterWin");
     }
 }

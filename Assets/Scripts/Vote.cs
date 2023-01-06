@@ -55,6 +55,7 @@ public class Vote : MonoBehaviour
 
     private void OnVoteEnd()
     {
+        GameManager.Instance.CheckWin();
         SetGroupActive(false);
     }
 

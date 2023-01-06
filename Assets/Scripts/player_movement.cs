@@ -104,6 +104,7 @@ public class player_movement : NetworkBehaviour
         playerNameText.gameObject.SetActive(false);
         NetworkManager.Destroy(GetComponent<MeshFilter>());
         NetworkManager.Destroy(GetComponent<MeshRenderer>());
+        GameManager.Instance.CheckWin();
     }
 
     void Update()
@@ -175,7 +176,10 @@ public class player_movement : NetworkBehaviour
     [ClientRpc]
     public void RpcVote(player_movement playerVoted)
     {
-        GameManager.Instance.Vote(this, playerVoted);
-        OnPlayerVote?.Invoke(playerVoted);
+        if (!isServer)
+        {
+            GameManager.Instance.Vote(this, playerVoted);
+            OnPlayerVote?.Invoke(playerVoted);
+        }
     }
 }
