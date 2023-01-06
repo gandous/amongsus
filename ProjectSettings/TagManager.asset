@@ -6,6 +6,8 @@ TagManager:
   tags:
   - RGBA
   - ColorSlider
+  - DontDestroyOnLoad
+  - GameManager
   layers:
   - Default
   - TransparentFX
