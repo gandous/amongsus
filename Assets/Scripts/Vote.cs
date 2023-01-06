@@ -10,10 +10,12 @@ public class Vote : MonoBehaviour
     public VerticalLayoutGroup LayoutGroup;
     public PlayerVote PlayerPrefab;
     private List<PlayerVote> _players = new List<PlayerVote>();
+    public Button SkipButton;
 
     // Start is called before the first frame update
     void Start()
     {
+        SkipButton.onClick.AddListener(SkipButtonClicked);
         SetGroupActive(false);
     }
 
@@ -44,7 +46,7 @@ public class Vote : MonoBehaviour
             PlayerVote playerUI = Instantiate(PlayerPrefab, LayoutGroup.transform);
             playerUI._vote = this;
             playerUI.PlayerBind = player;
-            playerUI.name = player.name;
+            playerUI.PlayerName.text = player.name;
             playerUI.AcceptButton.interactable = player.dead == false;
 
             _players.Add(playerUI);
@@ -53,6 +55,8 @@ public class Vote : MonoBehaviour
 
     private void OnVoteEnd()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         SetGroupActive(false);
     }
 
@@ -63,5 +67,10 @@ public class Vote : MonoBehaviour
         Group.blocksRaycasts = state;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void SkipButtonClicked()
+    {
+        player_movement.Local.CmdVote(null);
     }
 }

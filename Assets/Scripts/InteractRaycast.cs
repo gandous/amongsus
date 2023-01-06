@@ -40,7 +40,7 @@ public class InteractRaycast : MonoBehaviour
                     player_movement target_player = hit.collider.GetComponent<player_movement>();
 
                     if (kill_comp != null && target_player != null) {
-                        kill_comp.makeKill(target_player.playerName);
+                        kill_comp.makeKill(target_player.playerName, false);
                     }
                 } else if (player.role == Role.Victime && obj == null) {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();

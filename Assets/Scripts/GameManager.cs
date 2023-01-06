@@ -146,6 +146,10 @@ public class GameManager : MonoBehaviour
 
     internal bool Vote(player_movement voter, player_movement voted)
     {
+        if (voted == null && voter.dead == false)
+        {
+            _votes.Add(new PlayerVoteStruct {Voter = voter, Voted = voted});
+        }
         if(voter.dead == false && voted.dead == false && _votes.FindIndex(x => x.Voter == voter) == -1)
         {
             _votes.Add(new PlayerVoteStruct {Voter = voter, Voted = voted});
@@ -175,7 +179,6 @@ public class GameManager : MonoBehaviour
     internal void CheckEndVotes()
     {
         int alivePlayers = _players.Where(s => s.dead == false).Count();
-        print(alivePlayers);
         if(alivePlayers == _votes.Count)
         {
             foreach(player_movement player in _players)
@@ -202,7 +205,8 @@ public class GameManager : MonoBehaviour
             {
                 player_movement player = order[0].Key;
                 //player.CanMove = false;
-                player.dead = true;
+                player_movement useless = player_movement.Local;
+                useless.GetComponent<Kill>().makeKill(player.playerName, true);
 
                 NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = player });
             }
