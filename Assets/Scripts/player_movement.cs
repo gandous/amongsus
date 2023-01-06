@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Role {
     Victime = 0,
@@ -102,6 +103,7 @@ public class player_movement : NetworkBehaviour
         playerNameText.gameObject.SetActive(false);
         NetworkManager.Destroy(GetComponent<MeshFilter>());
         NetworkManager.Destroy(GetComponent<MeshRenderer>());
+        GameManager.Instance.CheckWin();
     }
 
     void Update()
@@ -118,6 +120,11 @@ public class player_movement : NetworkBehaviour
     {
         if (isLocalPlayer) {
             taskInfo.UpdateSlider(complete, total);
+            if (complete == total) {
+                SceneManager.LoadScene("CrewmateWin");
+                Destroy(GameObject.FindWithTag("DontDestroyOnLoad"));
+                Destroy(GameObject.FindWithTag("GameManager"));
+            }
         }
     }
 

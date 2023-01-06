@@ -9,7 +9,6 @@ public class MainMenu : MonoBehaviour
 {
 
     [SerializeField] private TMP_InputField ipInput;
-    [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private NetworkManager manager;
 
     // Start is called before the first frame update
