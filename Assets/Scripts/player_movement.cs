@@ -80,6 +80,10 @@ public class player_movement : NetworkBehaviour
             taskInfo = obj.GetComponent<TaskInfo>();
         }
 
+        if (isServer) {
+            Pname = "bgDu" + UnityEngine.Random.Range(11, 999);
+            playerName = Pname;
+        }
         if (GameManager.Instance)
             GameManager.Instance.AddPlayer(this);
 
@@ -91,9 +95,7 @@ public class player_movement : NetworkBehaviour
                 playerColor = infos.PlayerColor;
             }
         }
-        Pname = "bgDu" + UnityEngine.Random.Range(11, 99);
         floatingInfo.transform.localPosition = new Vector3(0, 1.2f, 0.2f);
-        playerName = Pname;
     }
 
     [ClientRpc]
