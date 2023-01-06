@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Mirror;
 
 public struct StartMessage : NetworkMessage
@@ -215,5 +216,32 @@ public class GameManager : MonoBehaviour
                 NetworkServer.SendToAll(new VoteDeadMessage { PlayerDead = null });
             }
         }
+    }
+
+    public void CheckWin()
+    {
+        int aliveImposter = _players.Where(s => s.role == Role.SUS && s.dead == false ).Count();
+        int alivePlayer = _players.Where(s => s.dead == false ).Count();
+        alivePlayer -= aliveImposter;
+
+        if (alivePlayer <= 0) {
+            ImposterWin();
+        } else if (alivePlayer == 0) {
+            CrewmateWin();
+        }
+    }
+
+    public void CrewmateWin()
+    {
+        SceneManager.LoadScene("CrewmateWin");
+        Destroy(GameObject.FindWithTag("DontDestroyOnLoad"));
+        Destroy(GameObject.FindWithTag("GameManager"));
+    }
+
+    public void ImposterWin()
+    {
+        SceneManager.LoadScene("ImposterWin");
+        Destroy(GameObject.FindWithTag("DontDestroyOnLoad"));
+        Destroy(GameObject.FindWithTag("GameManager"));
     }
 }

@@ -103,6 +103,7 @@ public class player_movement : NetworkBehaviour
         playerNameText.gameObject.SetActive(false);
         NetworkManager.Destroy(GetComponent<MeshFilter>());
         NetworkManager.Destroy(GetComponent<MeshRenderer>());
+        GameManager.Instance.CheckWin();
     }
 
     void Update()
