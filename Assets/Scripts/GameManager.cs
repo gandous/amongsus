@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.SceneManagement;
+using Mirror;
 
 public struct StartMessage : NetworkMessage
 {
@@ -122,6 +124,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _players.Count; i++) {
             _players[i].UpdateCompleteTask(totalTaskComplete, totalTask);
         }
+        SceneManager.LoadScene("CrewmateWin");
+        Destroy(this);
     }
 
     private void AsignTask()
