@@ -8,6 +8,7 @@ TagManager:
   - ColorSlider
   - DontDestroyOnLoad
   - GameManager
+  - DeadBody
   layers:
   - Default
   - TransparentFX
